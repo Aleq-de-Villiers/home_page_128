@@ -1,10 +1,25 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import logo from './logo.svg';
 import './App.css';
+import { Frame } from "./pages/Frame";
+import { Home } from "./pages/Home";
+import { NoPage } from "./pages/NoPage";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Frame />}>
+            <Route index element={<Home />} />
+            {/* <Route path="blogs" element={<Blogs />} />
+            <Route path="contact" element={<Contact />} /> */}
+            <Route path="*" element={<NoPage />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+      {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
@@ -17,7 +32,7 @@ function App() {
         >
           Learn React
         </a>
-      </header>
+      </header> */}
     </div>
   );
 }
