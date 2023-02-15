@@ -9,7 +9,7 @@ import { NoPage } from "./pages/NoPage";
 function App() {
   return (
     <div className="App">
-      <BrowserRouter >
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Routes>
           <Route path="/" element={<Frame />}>
             <Route index element={<Home />} />
