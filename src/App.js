@@ -13,8 +13,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Frame />}>
             <Route index element={<Home />} />
-            {/* <Route path="blogs" element={<Blogs />} />
-            <Route path="contact" element={<Contact />} /> */}
             <Route path="*" element={<NoPage />} />
           </Route>
         </Routes>
