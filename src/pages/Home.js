@@ -10,7 +10,7 @@ export function Home() {
             <p>We apologize for any inconvenience this may cause and thank you for your patience. We are excited to share our work with you and look forward to connecting with you soon.</p>
             <p>Stay tuned for more updates on our progress and new projects. Thank you for visiting our website!</p>
 
-            <img src={icon}></img>
+            <img src={icon} alt="main"></img>
         </div>
     )
 }
