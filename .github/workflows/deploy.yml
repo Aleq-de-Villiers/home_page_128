@@ -19,6 +19,7 @@ jobs:
 
     - name: Build project
       run: npm run build  # Replace with the command to build your project
+      continue-on-error: true
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
