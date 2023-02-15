@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main  # Replace with the name of your main branch
-  workflow_dispatch:
 
 jobs:
   build-and-deploy:
@@ -12,7 +11,7 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Install dependencies
       run: npm install  # Replace with the command to install dependencies for your project
