@@ -10,6 +10,9 @@ export function Frame() {
             <Link to="/">Home</Link>
         </li>
         <li>
+            <Link to="/blogs">Art</Link>
+        </li>
+        <li>
             <Link to="/blogs">Blogs</Link>
         </li>
         <li>
@@ -17,7 +20,7 @@ export function Frame() {
         </li>
         </ul>
     </nav>
-    
+
     <Outlet />
     </>
     )
