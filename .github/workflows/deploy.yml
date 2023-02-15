@@ -1,33 +1,53 @@
-name: Deploy to GitHub Pages
+name: Generate a build and push to another branch
 
 on:
   push:
     branches:
-      - main  # Replace with the name of your main branch
+      - master
 
-jobs:
-  build-and-deploy:
+# jobs:
+#   test:
+#     runs-on: ubuntu-latest
+#     name: Test
+#     steps:
+#       - name: git-checkout
+#         uses: actions/checkout@v2
+
+#       - name: Install all dependencies
+#         run: npm install
+
+#       - name: Start and Test
+#         run: |
+#           npm start & npx wait-on http://localhost:3000
+#           npm run test
+      
+#       - name: Create Pull Request
+#         uses: peter-evans/create-pull-request@v4
+
+  build:
+    # needs: test
     runs-on: ubuntu-latest
-
+    name: Build and Push
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: git-checkout
+        uses: actions/checkout@v2
 
-    - name: Install dependencies
-      run: npm install  # Replace with the command to install dependencies for your project
+      - name: Install all dependencies
+        run: npm install
 
-    - name: Build project
-      run: npm run build  # Replace with the command to build your project
-      continue-on-error: true
+      - name: Build
+        run: |
+          CI=false
+          npm run build # The build command of your project
+    
+      - name: no Jekyll
+        run: echo "" > build/.nojekyll
 
-    - name: no Jekyll
-      run: echo "" > build/.nojekyll
-
-    - name: Push
-      uses: s0/git-publish-subdir-action@develop
-      env:
-        REPO: self
-        BRANCH: build-publish # The branch name where you want to push the assets
-        FOLDER: build # The directory where your assets are generated
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub will automatically add this - you don't need to bother getting a token
-        MESSAGE: "Build: ({sha}) {msg}" # The commit message
+      - name: Push
+        uses: s0/git-publish-subdir-action@develop
+        env:
+          REPO: self
+          BRANCH: build-publish # The branch name where you want to push the assets
+          FOLDER: build # The directory where your assets are generated
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub will automatically add this - you don't need to bother getting a token
+          MESSAGE: "Build: ({sha}) {msg}" # The commit message
